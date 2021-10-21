@@ -30,6 +30,7 @@ public:
     }
 
     void launch(sf::Time);
+    void checkCollision();
 
     ~Buzzy() {};
 

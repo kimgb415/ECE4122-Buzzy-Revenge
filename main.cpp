@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <vector>
 #include "loadFile.hpp"
 #include "Buzzy.h"
 
@@ -19,6 +20,8 @@ int main()
     loadEverything();
     placeEverything();
 
+
+
     // initial status of the game will be status
     status = GameStatus::initial;
     // control the user input
@@ -31,6 +34,7 @@ int main()
     // clcok and time element
     sf::Clock clock;
     sf::Time afterRelease;
+
 
     // run the program as long as the window is open
     while (window.isOpen())

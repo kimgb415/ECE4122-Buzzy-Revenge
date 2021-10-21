@@ -42,6 +42,10 @@ extern sf::Text score;
 extern sf::Text scoreNum;
 extern sf::Text power;
 
+
+extern std::vector<sf::Sprite*> spriteVec;
+extern std::vector<sf::Text*> textVec;
+
 // function declaration to load every object
 void loadEverything();
 // function declaration to place every object

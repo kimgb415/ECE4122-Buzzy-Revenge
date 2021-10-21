@@ -23,3 +23,9 @@ void Buzzy::launch(sf::Time t)
 
     return;
 }
+
+// check collision
+void Buzzy::checkCollision()
+{
+
+}

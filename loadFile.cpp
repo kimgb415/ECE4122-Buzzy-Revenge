@@ -52,6 +52,10 @@ sf::Text score;
 sf::Text scoreNum;
 sf::Text power;
 
+// vector for different kinds of objects
+std::vector<sf::Sprite*> spriteVec;
+std::vector<sf::Text*> textVec;
+
 
 
 void loadEverything()
@@ -94,6 +98,28 @@ void loadEverything()
     tiger.setTexture(tigerT);
 
 
+    // add all the sprites that can be collided with smallBuzzy
+    spriteVec.push_back(&angryUnicorn);
+    spriteVec.push_back(&bunny);
+    spriteVec.push_back(&chicken);
+    spriteVec.push_back(&dog);
+    spriteVec.push_back(&frog);
+    spriteVec.push_back(&bulldog);
+    spriteVec.push_back(&insect);
+    spriteVec.push_back(&mouse);
+    spriteVec.push_back(&pig);
+    spriteVec.push_back(&sheep);
+    spriteVec.push_back(&tiger);
+
+
+
+
+
+    // set the origin of the smallBuzzy
+    sf::Vector2<float> buzzyOrigin(smallBuzzy.getLocalBounds().width, smallBuzzy.getLocalBounds().height/2.f);
+    smallBuzzy.setOrigin(buzzyOrigin);
+
+
     // set the rectangles
     // outer bound
     powerOuter.setSize(sf::Vector2f(300.f, 30.f));
@@ -134,6 +160,17 @@ void loadEverything()
     scoreNum.setString("99");
     power.setString("Power");
 
+
+    // add all the texts that should disappear after game starts
+    textVec.push_back(&buzzyRevenge);
+    textVec.push_back(&pressEnter);
+    textVec.push_back(&pressEsc);
+    textVec.push_back(&pressSpace);
+    textVec.push_back(&pressUp);
+    textVec.push_back(&createdBy);
+    textVec.push_back(&myName);
+
+
     // adjust the color of text
     buzzyRevenge.setFillColor(sf::Color::Red);
 
@@ -169,7 +206,7 @@ void placeEverything()
     mouse.setPosition(1600.f, 900.f);
     pig.setPosition(1800.f, 800.f);
     sheep.setPosition(1600.f, 500.f);
-    smallBuzzy.setPosition(0.f, 540.f);
+    smallBuzzy.setPosition(smallBuzzy.getLocalBounds().width, 540.f);
     tiger.setPosition(1600.f, 800.f);
     tiger.scale(0.1f, 0.1f);
 

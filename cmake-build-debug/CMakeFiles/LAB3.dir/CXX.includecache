@@ -6,15 +6,33 @@
 
 #IncludeRegexTransform: 
 
-/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/Buzzy.cpp
-Buzzy.h
-/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/Buzzy.h
-cmath
--
-
 /Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/Buzzy.h
 SFML/Graphics.hpp
 -
+
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.cpp
+iostream
+-
+SFML/Graphics.hpp
+-
+
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.hpp
+iostream
+-
+SFML/Graphics.hpp
+-
+
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/main.cpp
+SFML/Graphics.hpp
+-
+cmath
+-
+vector
+-
+loadFile.hpp
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.hpp
+Buzzy.h
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/Buzzy.h
 
 /usr/local/include/SFML/Config.hpp
 TargetConditionals.h
