@@ -4,6 +4,7 @@
 CMakeFiles/LAB3.dir/Buzzy.cpp.o: \
  ../Buzzy.cpp \
  ../Buzzy.h \
+ ../loadFile.hpp \
  /usr/local/include/SFML/Config.hpp \
  /usr/local/include/SFML/Graphics.hpp \
  /usr/local/include/SFML/Graphics/BlendMode.hpp \
@@ -80,6 +81,7 @@ CMakeFiles/LAB3.dir/Buzzy.cpp.o: \
  /usr/local/include/SFML/Window/WindowStyle.hpp
 CMakeFiles/LAB3.dir/loadFile.cpp.o: \
  ../loadFile.cpp \
+ ../loadFile.hpp \
  /usr/local/include/SFML/Config.hpp \
  /usr/local/include/SFML/Graphics.hpp \
  /usr/local/include/SFML/Graphics/BlendMode.hpp \

@@ -17,11 +17,14 @@ private:
     sf::Vector2<float> location;
     sf::Sprite &buzzySprite;
 
+    int score;
+    int lives;
+
 
 public:
     // constructor
     Buzzy(sf::Vector2<float> initVel, sf::Vector2<float> initLoc, sf::Sprite& buzzySprite):  \
-        initVel(initVel), initLoc(initLoc), velocity(initVel), location(initLoc), buzzySprite(buzzySprite) {};
+        initVel(initVel), initLoc(initLoc), velocity(initVel), location(initLoc), buzzySprite(buzzySprite), score(0), lives(5) {};
 
     void setInit(sf::Vector2<float> vel, sf::Vector2<float> loc)
     {
@@ -29,8 +32,10 @@ public:
         initLoc = loc;
     }
 
+    int getLife() const;
     void launch(sf::Time);
-    void checkCollision();
+    bool checkCollision(sf::Time);
+    void randomFlying(sf::Time, int, float&);
 
     ~Buzzy() {};
 

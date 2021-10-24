@@ -2,6 +2,9 @@
 // Created by 김갑현 on 2021/10/19.
 //
 #include <iostream>
+#include <random>
+#include <algorithm>
+#include "loadFile.hpp"
 #include <SFML/Graphics.hpp>
 
 sf::Texture angryUnicornT;
@@ -23,7 +26,6 @@ sf::Texture tigerT;
 sf::Sprite angryUnicorn;
 sf::Sprite background;
 sf::Sprite bunny;
-sf::Sprite buzzyLife;
 sf::Sprite chicken;
 sf::Sprite cloud;
 sf::Sprite dog;
@@ -35,8 +37,14 @@ sf::Sprite pig;
 sf::Sprite sheep;
 sf::Sprite smallBuzzy;
 sf::Sprite tiger;
+sf::Sprite buzzyLife1;
+sf::Sprite buzzyLife2;
+sf::Sprite buzzyLife3;
+sf::Sprite buzzyLife4;
+sf::Sprite buzzyLife5;
 sf::RectangleShape powerOuter;
 sf::RectangleShape powerInner;
+
 
 sf::Font font;
 
@@ -53,8 +61,9 @@ sf::Text scoreNum;
 sf::Text power;
 
 // vector for different kinds of objects
-std::vector<sf::Sprite*> spriteVec;
-std::vector<sf::Text*> textVec;
+std::vector<object<sf::Sprite>> spriteVec;
+std::vector<object<sf::Sprite>> lifeVec;
+std::vector<object<sf::Text>> textVec;
 
 
 
@@ -84,7 +93,6 @@ void loadEverything()
     angryUnicorn.setTexture(angryUnicornT);
     background.setTexture(backgroundT);
     bunny.setTexture(bunnyT);
-    buzzyLife.setTexture(buzzyLifeT);
     chicken.setTexture(chickenT);
     cloud.setTexture(cloudT);
     dog.setTexture(dogT);
@@ -96,23 +104,38 @@ void loadEverything()
     sheep.setTexture(sheepT);
     smallBuzzy.setTexture(smallBuzzyT);
     tiger.setTexture(tigerT);
+    buzzyLife1.setTexture(buzzyLifeT);
+    buzzyLife2.setTexture(buzzyLifeT);
+    buzzyLife3.setTexture(buzzyLifeT);
+    buzzyLife4.setTexture(buzzyLifeT);
+    buzzyLife5.setTexture(buzzyLifeT);
 
 
     // add all the sprites that can be collided with smallBuzzy
-    spriteVec.push_back(&angryUnicorn);
-    spriteVec.push_back(&bunny);
-    spriteVec.push_back(&chicken);
-    spriteVec.push_back(&dog);
-    spriteVec.push_back(&frog);
-    spriteVec.push_back(&bulldog);
-    spriteVec.push_back(&insect);
-    spriteVec.push_back(&mouse);
-    spriteVec.push_back(&pig);
-    spriteVec.push_back(&sheep);
-    spriteVec.push_back(&tiger);
+    spriteVec.push_back(object<sf::Sprite>(&angryUnicorn, true, UNICORN));
+    spriteVec.push_back(object<sf::Sprite>(&bunny, true, BUNNY));
+    spriteVec.push_back(object<sf::Sprite>(&chicken, true, CHICKEN));
+    spriteVec.push_back(object<sf::Sprite>(&dog, true, DOG));
+    spriteVec.push_back(object<sf::Sprite>(&frog, true, FROG));
+    spriteVec.push_back(object<sf::Sprite>(&sheep, true, SHEEP));
+    spriteVec.push_back(object<sf::Sprite>(&pig, true, PIG));
+    spriteVec.push_back(object<sf::Sprite>(&mouse, true, MOUSE));
+    spriteVec.push_back(object<sf::Sprite>(&insect, true, INSECT));
+    spriteVec.push_back(object<sf::Sprite>(&bulldog, true, BULLDOG));
+    spriteVec.push_back(object<sf::Sprite>(&tiger, true, TIGER));
 
 
 
+    // add all the lives
+    lifeVec.push_back(object<sf::Sprite>(&buzzyLife1, true, 1));
+    lifeVec.push_back(object<sf::Sprite>(&buzzyLife2, true, 2));
+    lifeVec.push_back(object<sf::Sprite>(&buzzyLife3, true, 3));
+    lifeVec.push_back(object<sf::Sprite>(&buzzyLife4, true, 4));
+    lifeVec.push_back(object<sf::Sprite>(&buzzyLife5, true, 5));
+    for (auto& obj: lifeVec)
+    {
+        obj.obj->setScale(0.3, 0.3);
+    }
 
 
     // set the origin of the smallBuzzy
@@ -157,18 +180,18 @@ void loadEverything()
     createdBy.setString("created by");
     myName.setString("Gabhyun Kim");
     score.setString("Score: ");
-    scoreNum.setString("99");
+    scoreNum.setString("0");
     power.setString("Power");
 
 
     // add all the texts that should disappear after game starts
-    textVec.push_back(&buzzyRevenge);
-    textVec.push_back(&pressEnter);
-    textVec.push_back(&pressEsc);
-    textVec.push_back(&pressSpace);
-    textVec.push_back(&pressUp);
-    textVec.push_back(&createdBy);
-    textVec.push_back(&myName);
+    textVec.push_back(object<sf::Text>(&buzzyRevenge, true, REVENGE));
+    textVec.push_back(object<sf::Text>(&pressEnter, true, ENTER));
+    textVec.push_back(object<sf::Text>(&pressEsc, true, ESC));
+    textVec.push_back(object<sf::Text>(&pressSpace, true, SPACE));
+    textVec.push_back(object<sf::Text>(&pressUp, true, UP));
+    textVec.push_back(object<sf::Text>(&createdBy, true, CREATED));
+    textVec.push_back(object<sf::Text>(&myName, true, MYNAME));
 
 
     // adjust the color of text
@@ -197,7 +220,11 @@ void placeEverything()
     // place all the sprites
     angryUnicorn.setPosition(1800.f, 500.f);
     bunny.setPosition(1600.f, 600.f);
-    buzzyLife.setPosition(30.f, 50.f);
+    buzzyLife1.setPosition(110.f, 50.f);
+    buzzyLife2.setPosition(150.f, 50.f);
+    buzzyLife3.setPosition(190.f, 50.f);
+    buzzyLife4.setPosition(230.f, 50.f);
+    buzzyLife5.setPosition(270.f, 50.f);
     chicken.setPosition(1800.f, 900.f);
     dog.setPosition(1600.f, 700.f);
     frog.setPosition(1800.f, 600.f);
@@ -210,51 +237,150 @@ void placeEverything()
     tiger.setPosition(1600.f, 800.f);
     tiger.scale(0.1f, 0.1f);
 
+    // flip the insect
+    insect.setScale(-1.4f, 1.4f);
 
     // place the rectangles
     powerOuter.setPosition(150.f, 1000.f);
     powerInner.setPosition(150.f, 1000.f);
 };
 
-void drawScreen(sf::RenderWindow& window)
+void drawScreen(sf::RenderWindow& window, int lifeCount)
 {
     // draw background first
     window.draw(background);
 
     // draw text
     window.draw(lives);
-    window.draw(buzzyRevenge);
-    window.draw(pressEnter);
-    window.draw(pressEsc);
-    window.draw(pressSpace);
-    window.draw(pressUp);
-    window.draw(createdBy);
-    window.draw(myName);
     window.draw(power);
     window.draw(score);
     window.draw(scoreNum);
+    for (auto obj: textVec)
+    {
+        if (obj.draw)
+        {
+            window.draw(*obj.obj);
+        }
+    }
 
     // draw rectangles
     window.draw(powerOuter);
     window.draw(powerInner);
 
     // draw sprites
-    window.draw(angryUnicorn);
-    window.draw(bunny);
-    window.draw(buzzyLife);
-    window.draw(chicken);
-//    window.draw(cloud);
-    window.draw(dog);
-    window.draw(frog);
-    window.draw(bulldog);
-    window.draw(insect);
-    window.draw(mouse);
-    window.draw(pig);
-    window.draw(sheep);
     window.draw(smallBuzzy);
-    window.draw(tiger);
-
+    for (auto obj: spriteVec)
+    {
+        if (obj.draw)
+        {
+            window.draw(*obj.obj);
+        }
+    }
+    for (auto obj:  lifeVec)
+    {
+        if (obj.oID <= lifeCount)
+        {
+            obj.draw = true;
+        }
+        else
+        {
+            obj.draw = false;
+        }
+        if (obj.draw)
+        {
+            window.draw(*obj.obj);
+        }
+    }
 
 
     return;
 };
+
+void recreateLevel(unsigned timeSeed)
+{
+    std::random_device myRandomDevice;
+    unsigned seed = myRandomDevice();
+    std::default_random_engine generator(seed);
+    std::uniform_int_distribution<int> distribution(0,1);
+    // place one evil mascot for each column
+    int bulldogColumn = distribution(generator);
+    bulldog.setPosition(1600.f + 200.f*bulldogColumn, 0.f);
+    tiger.setPosition(1600.f + 200.f*(1-bulldogColumn), 0.f);
+    std::vector<int> whereColumn;
+    std::vector<int> whereRow;
+    for (int i = 0; i < 8; i++)
+    {
+        if (i < 5)
+        {
+            whereRow.push_back(i);
+        }
+        whereColumn.push_back(i);
+    }
+    std::shuffle(whereColumn.begin(), whereColumn.end(), std::default_random_engine(timeSeed));
+    std::shuffle(whereRow.begin(), whereRow.end(), std::default_random_engine(timeSeed));
+
+    // pick the column for the rest
+    for (int i = 0 ; i < 8; i++)
+    {
+        if (i < 4)
+        {
+            spriteVec[i].obj->setPosition(1600.f, 0.f);
+        }
+        else
+        {
+            spriteVec[i].obj->setPosition(1800.f, 0.f);
+        }
+    }
+
+    // pick the row for each object in first column
+    for (int i = 0; i < 4; i++)
+    {
+        for (auto &obj: spriteVec)
+        {
+            if (!obj.draw && obj.obj->getPosition().x == 1600.f)
+            {
+                obj.draw = true;
+                obj.obj->setPosition(1600.f, 500.f + 100.f * whereRow[i]);
+                break;
+            }
+        }
+    }
+    if (!bulldogColumn)
+    {
+        bulldog.setPosition(1600.f, 500.f + 100.f * whereRow[4]);
+    }
+    else
+    {
+        tiger.setPosition(1600.f, 500.f + 100.f * whereRow[4]);
+    }
+
+    std::shuffle(whereRow.begin(), whereRow.end(), std::default_random_engine(timeSeed));
+    // pick the row for each object in second column
+    for (int i = 0; i < 4; i++)
+    {
+        for (auto &obj: spriteVec)
+        {
+            if (!obj.draw && obj.obj->getPosition().x == 1800.f)
+            {
+                obj.draw = true;
+                obj.obj->setPosition(1800.f, 500.f + 100.f * whereRow[i]);
+                break;
+            }
+        }
+    }
+    if (bulldogColumn)
+    {
+        bulldog.setPosition(1800.f, 500.f + 100.f * whereRow[4]);
+    }
+    else
+    {
+        tiger.setPosition(1800.f, 500.f + 100.f * whereRow[4]);
+    }
+
+    // set tiger and bulldog drawable again
+    spriteVec[TIGER].draw = true;
+    spriteVec[BULLDOG].draw = true;
+
+    spriteVec[INSECT].obj->setPosition(1825.f, 200.f);
+    spriteVec[INSECT].draw = true;
+}
