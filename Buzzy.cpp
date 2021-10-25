@@ -59,6 +59,16 @@ bool Buzzy::checkCollision(sf::Time time)
                 // mad unicorn disappear
                 object.draw = false;
                 // images above drop
+                for (auto &above: spriteVec)
+                {
+                    if (above.obj->getPosition().x == spriteVec[UNICORN].obj->getPosition().x)
+                    {
+                        if (above.obj->getPosition().y < spriteVec[UNICORN].obj->getPosition().y)
+                        {
+                            above.obj->move(0.f, 100.f);
+                        }
+                    }
+                }
             }
             else if (object.oID == TIGER || object.oID == BULLDOG)
             {
