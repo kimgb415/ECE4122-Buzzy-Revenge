@@ -1,6 +1,11 @@
-//
-// Created by 김갑현 on 2021/10/20.
-//
+/*
+Author: <Gabhyun Kim>
+Class: ECE4122
+Last Date Modified: <10/24/2021>
+Description:
+    function definitions for the Buzzy Class
+*/
+
 #include "Buzzy.h"
 #include <cmath>
 #include <string>
@@ -12,11 +17,13 @@ int Buzzy::getLife() const
     return lives;
 }
 
+
+// lanch the buzzy
 void Buzzy::launch(sf::Time t)
 {
     float time = t.asSeconds();
     float g = 9.8f * 10;
-    // update
+    // update the location
     location.y = initLoc.y + initVel.y * time + 0.5 * g * time * time;
     velocity.y = initVel.y + g * time;
     location.x = initLoc.x + initVel.x * time;
@@ -36,6 +43,7 @@ void Buzzy::launch(sf::Time t)
 bool Buzzy::checkCollision(sf::Time time)
 {
     for (auto &object: spriteVec) {
+        // do not have to check the collision with the objects that disappeared
         if (!object.draw)
         {
             continue;
@@ -48,6 +56,7 @@ bool Buzzy::checkCollision(sf::Time time)
                 score += 75;
                 // insect disappear
                 object.draw = false;
+                // reset the flying insect to the original position for next level
                 object.obj->setPosition(1825.f, 200.f);
             }
             else if (object.oID == UNICORN)
@@ -58,7 +67,7 @@ bool Buzzy::checkCollision(sf::Time time)
                 }
                 // mad unicorn disappear
                 object.draw = false;
-                // images above drop
+                // images above drop by one
                 for (auto &above: spriteVec)
                 {
                     if (above.obj->getPosition().x == spriteVec[UNICORN].obj->getPosition().x)
@@ -90,6 +99,7 @@ bool Buzzy::checkCollision(sf::Time time)
             }
             else
             {
+                // hit ohter will lose one life
                 object.draw = false;
                 // lose one life
                 --lives;
@@ -98,6 +108,7 @@ bool Buzzy::checkCollision(sf::Time time)
             // reset the buzzy to the beginning position
             buzzySprite.setPosition(smallBuzzy.getLocalBounds().width, 540.f);
             buzzySprite.setRotation(0.f);
+            // reset the power indicator
             powerInner.setSize(sf::Vector2f(20.f, 30.f));
             scoreNum.setString(std::to_string(score));
 
@@ -110,6 +121,7 @@ bool Buzzy::checkCollision(sf::Time time)
     float centerX = buzzySprite.getPosition().x - buzzySprite.getLocalBounds().width / 2.0f;
     if (centerX > 1920.f || centerX < 0.f || centerY < 0.f || centerY > 1080.f)
     {
+        // lose one life
         lives--;
         // reset the buzzy to the beginning position
         buzzySprite.setPosition(smallBuzzy.getLocalBounds().width, 540.f);
@@ -123,6 +135,7 @@ bool Buzzy::checkCollision(sf::Time time)
     return false;
 }
 
+// random flying path of the insect
 void Buzzy::randomFlying(sf::Time t, int before, float& beeVertical)
 {
     int time = (int) t.asSeconds();
@@ -136,6 +149,7 @@ void Buzzy::randomFlying(sf::Time t, int before, float& beeVertical)
     // move if the insect is inside the screen
     if (x > 0.f && y > 0.f && y < 1080.f)
     {
+        // randomly flying in +y or -y direction every second
         if (before != time)
         {
             beeVertical = distribution(generator) ? -0.05f : 0.1f;

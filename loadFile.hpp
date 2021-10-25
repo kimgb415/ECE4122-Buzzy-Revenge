@@ -1,6 +1,12 @@
-//
-// Created by 김갑현 on 2021/10/19.
-//
+/*
+Author: <Gabhyun Kim>
+Class: ECE4122
+Last Date Modified: <10/24/2021>
+Description:
+    header file of managing the objects
+*/
+
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #ifndef LAB3_LOADFILE_H
@@ -9,6 +15,7 @@
 
 #endif //LAB3_LOADFILE_H
 
+// unique object ID for sprites and texts
 #define UNICORN 0
 #define BUNNY 1
 #define CHICKEN 2
@@ -29,6 +36,9 @@
 #define CREATED 16
 #define MYNAME 17
 
+
+// object class will be used to identify each sprite or text with their unique oID
+// and the draw variable will determine if or not to draw the corresponding object
 template <typename T>
 class object
 {

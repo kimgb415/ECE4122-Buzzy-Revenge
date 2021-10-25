@@ -1,3 +1,12 @@
+/*
+Author: <Gabhyun Kim>
+Class: ECE4122
+Last Date Modified: <10/24/2021>
+Description:
+    main source file of the project
+*/
+
+
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include "loadFile.hpp"

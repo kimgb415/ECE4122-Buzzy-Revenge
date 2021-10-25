@@ -1,6 +1,12 @@
-//
-// Created by 김갑현 on 2021/10/20.
-//
+/*
+Author: <Gabhyun Kim>
+Class: ECE4122
+Last Date Modified: <10/24/2021>
+Description:
+    class definition for the Buzzy Class
+    Buzzy class will be used to implement the small buzzy and the flying insect
+*/
+
 #ifndef LAB3_BUZZY_H
 #define LAB3_BUZZY_H
 

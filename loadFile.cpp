@@ -1,6 +1,11 @@
-//
-// Created by 김갑현 on 2021/10/19.
-//
+/*
+Author: <Gabhyun Kim>
+Class: ECE4122
+Last Date Modified: <10/24/2021>
+Description:
+    function definitions for those to be used to load the texture, place the objects and draw them
+*/
+
 #include <iostream>
 #include <random>
 #include <algorithm>
@@ -276,12 +281,15 @@ void drawScreen(sf::RenderWindow& window, int lifeCount)
             window.draw(*obj.obj);
         }
     }
+
+    // draw the lives
     for (auto obj:  lifeVec)
     {
         if (obj.oID <= lifeCount)
         {
             obj.draw = true;
         }
+        // hide the lost lives
         else
         {
             obj.draw = false;
@@ -296,6 +304,7 @@ void drawScreen(sf::RenderWindow& window, int lifeCount)
     return;
 };
 
+// recreate the level when both mascots are hit
 void recreateLevel(unsigned timeSeed)
 {
     std::random_device myRandomDevice;
@@ -316,6 +325,8 @@ void recreateLevel(unsigned timeSeed)
         }
         whereColumn.push_back(i);
     }
+
+    // randomly shuffle the vectors
     std::shuffle(whereColumn.begin(), whereColumn.end(), std::default_random_engine(timeSeed));
     std::shuffle(whereRow.begin(), whereRow.end(), std::default_random_engine(timeSeed));
 
@@ -381,6 +392,7 @@ void recreateLevel(unsigned timeSeed)
     spriteVec[TIGER].draw = true;
     spriteVec[BULLDOG].draw = true;
 
+    // flying insect should appear again when level is recreated
     spriteVec[INSECT].obj->setPosition(1825.f, 200.f);
     spriteVec[INSECT].draw = true;
 }

@@ -22,11 +22,33 @@ random
 SFML/Graphics.hpp
 -
 
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.cpp
+iostream
+-
+random
+-
+algorithm
+-
+loadFile.hpp
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.hpp
+SFML/Graphics.hpp
+-
+
 /Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.hpp
 iostream
 -
 SFML/Graphics.hpp
 -
+
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/main.cpp
+SFML/Graphics.hpp
+-
+cmath
+-
+loadFile.hpp
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/loadFile.hpp
+Buzzy.h
+/Users/gav/Desktop/GAV/2021_2_조지아텍/Adv Prog/LAB/LAB3/LAB3/Buzzy.h
 
 /usr/local/include/SFML/Config.hpp
 TargetConditionals.h
