@@ -1,4 +1,6 @@
 # ECE4122-Buzzy-Revenge
+## Game Video URL
+### https://youtu.be/yTUvtL1O0sw
 
 ## Buzzy’s Revenge
 ### 1. Game starts when the user hits the “Enter” key.
